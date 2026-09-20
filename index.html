@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1247">
+  <title>Quiz Buzzer</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="landing">
+    <div class="landing-inner">
+      <header>
+        <h1>Quiz Buzzer</h1>
+        <p class="lede">The organizer opens the buzzers. Players tap on their phones. The first tap wins, and taps made before the buzzers open never count.</p>
+      </header>
+
+      <div class="choices">
+        <section class="card">
+          <h2>Join as a player</h2>
+          <p class="muted">Enter the 4-letter room code shown on the organizer's screen.</p>
+          <form action="/play" method="get">
+            <div class="field">
+              <label for="room">Room code</label>
+              <input id="room" name="room" class="code" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" required pattern="[A-Za-z0-9]{4}">
+            </div>
+            <button class="btn primary big" type="submit">Join</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Run a quiz</h2>
+          <p class="muted">Open the organizer console to create a room, watch who has joined, and control the buzzers. You'll need the organizer password.</p>
+          <a class="btn go big" href="/host">Open console</a>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

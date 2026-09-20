@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1247">
+  <meta name="robots" content="noindex">
+  <title>Organizer console · Quiz Buzzer</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="host">
+
+  <!-- ============ login ============ -->
+  <main id="login" class="host-login" hidden>
+    <section class="card">
+      <h1>Organizer console</h1>
+      <form id="loginForm" autocomplete="off">
+        <div class="field">
+          <label for="pw">Organizer password</label>
+          <input id="pw" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn primary big" type="submit">Start a new room</button>
+        <p id="loginError" class="error" role="alert"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- ============ console ============ -->
+  <div id="dash" hidden>
+    <header class="host-bar">
+      <h1>Quiz Buzzer</h1>
+      <div class="right">
+        <span class="conn"><span id="connDot" class="dot"></span><span id="connText">Connecting…</span></span>
+        <button id="muteBtn" class="btn small" type="button" aria-pressed="false">Sound on</button>
+        <button id="endBtn" class="btn small bad" type="button">End session</button>
+      </div>
+    </header>
+
+    <div class="host-grid">
+      <div>
+        <section id="stage" class="card stage" data-state="locked" aria-live="polite">
+          <p id="stageLabel" class="label"></p>
+          <h2 id="stageHeadline" class="headline"></h2>
+          <p id="stageSub" class="sub"></p>
+
+          <div class="controls">
+            <button id="openBtn" class="btn go big" type="button">Open buzzers <span class="kbd">Space</span></button>
+            <button id="correctBtn" class="btn primary big" type="button" hidden>Correct +1 <span class="kbd">C</span></button>
+            <button id="wrongBtn" class="btn bad big" type="button" hidden>Wrong, next <span class="kbd">W</span></button>
+            <button id="resetBtn" class="btn big" type="button">Next question <span class="kbd">R</span></button>
+          </div>
+        </section>
+
+        <div class="lists">
+          <section class="card">
+            <h3>Buzz order</h3>
+            <p class="hint">Time behind the first buzz, measured on the server.</p>
+            <ol id="buzzList" class="rank"></ol>
+            <p id="buzzEmpty" class="empty">No buzzes yet.</p>
+          </section>
+          <section class="card">
+            <h3>Pressed too early</h3>
+            <p class="hint">Pressed before the buzzers opened. These never count.</p>
+            <ul id="earlyList" class="rank early"></ul>
+            <p id="earlyEmpty" class="empty">Nobody jumped the gun.</p>
+          </section>
+        </div>
+      </div>
+
+      <aside class="side">
+        <section class="card join">
+          <img id="qr" alt="QR code to join this room" width="120" height="120">
+          <div>
+            <div id="roomCode" class="code">····</div>
+            <p id="joinUrl" class="url"></p>
+            <button id="copyBtn" class="btn small" type="button">Copy join link</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <label class="toggle">
+            <input id="lockoutToggle" type="checkbox">
+            <span>Lock out early pressers
+              <small>Anyone who presses early can't buzz for the rest of that question.</small>
+            </span>
+          </label>
+        </section>
+
+        <section class="card">
+          <div class="players-head">
+            <h3>Players</h3>
+            <span id="onlineCount" class="muted"></span>
+          </div>
+          <ul id="players" class="plist"></ul>
+          <p id="playersEmpty" class="empty">Nobody has joined yet. Share the code or QR.</p>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/host.js"></script>
+</body>
+</html>

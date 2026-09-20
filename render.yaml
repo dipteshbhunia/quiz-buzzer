@@ -1,0 +1,10 @@
+# Deploy on Render: New > Blueprint > pick this repo.
+services:
+  - type: web
+    name: quiz-buzzer
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: HOST_PASSWORD
+        sync: false        # you'll be asked for it in the dashboard
